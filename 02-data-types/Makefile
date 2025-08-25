@@ -4,10 +4,10 @@ TARGET = data-types
 
 all: $(TARGET)
 
-$(TARGET): data-types.o
+$(TARGET): $(TARGET).o
 	     $(CC) $(CFLAGS) $^ -o $@
 
-data-types.o: data-types.c
+$(TARGET).o: $(TARGET).c
 	     $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
