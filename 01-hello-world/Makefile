@@ -1,13 +1,14 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic
+TARGET = hello-world
 
-all: hello-world
+all: $(TARGET)
 
 hello-world: hello-world.o
-	     $(CC) $(CFLAGS) hello-world.o -o hello-world
+	     $(CC) $(CFLAGS) $^ -o $@
 
 hello-world.o: hello-world.c
-	       $(CC) $(CFLAGS) -c hello-world.c -o hello-world.o
+	     $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 		rm *.o hello-world
