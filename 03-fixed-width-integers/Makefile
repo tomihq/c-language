@@ -7,7 +7,7 @@ all: $(TARGET)
 $(TARGET): fixed-width-integers.o
 	     $(CC) $(CFLAGS) $^ -o $@
 
-data-types.o: fixed-width-integers.c
+fixed-width-integers.o: fixed-width-integers.c
 	     $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
