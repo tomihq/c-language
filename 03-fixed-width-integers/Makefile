@@ -4,10 +4,10 @@ TARGET = fixed-width-integers
 
 all: $(TARGET)
 
-$(TARGET): fixed-width-integers.o
+$(TARGET): $(TARGET).o
 	     $(CC) $(CFLAGS) $^ -o $@
 
-fixed-width-integers.o: fixed-width-integers.c
+fixed-width-integers.o: $(TARGET).c
 	     $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
