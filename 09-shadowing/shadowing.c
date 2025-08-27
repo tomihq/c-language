@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
 
-const uint32_t i = 0;
+const uint32_t i = 0; //global-scope static variable
 
 void shadowing(){
-	const int i = 4;
+	const int i = 4; //block-scope automatic variable
 	printf("i shadowing: %d\n", i); //will return 4 (local value)
 	return; 
 }
