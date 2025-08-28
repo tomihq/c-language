@@ -1,13 +1,15 @@
 #include <stdio.h>
 void swap(int* a, int* b);
+void print_int(const int* a);
 void print_arr(const int* a[]);
 
 int main(){
 	int x = 10, y = 20;
 	swap(&x, &y);
 	printf("x: %d, y: %d \n", x, y);
+	print_int(&x);
 	int arr[3] = {1, 2, 3};
-	print_arr(&arr);
+	//print_arr(&arr);
 	return 0;
 }
 
@@ -28,6 +30,10 @@ void print_arr(const int* arr[]){
 		printf(", ");
 	}
   }
+}
+
+void print_int(const int* a){
+	printf("print_int, value: %d \n", *a);
 }
 
 
