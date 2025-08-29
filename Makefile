@@ -1,13 +1,14 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic
 TARGET = hello-world
+VPATH = $(shell find . -type d | tr '\n' ':')
 
 all: $(TARGET)
 
-$(TARGET): hello-world.o
+$(TARGET): $(TARGET).o
 	     $(CC) $(CFLAGS) $^ -o $@
 
-hello-world.o: hello-world.c
+$(TARGET).o: $(TARGET).c
 	     $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
