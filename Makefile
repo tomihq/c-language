@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic
-TARGET = hello-world
+TARGET = 3
 VPATH = $(shell find . -type d | tr '\n' ':')
 
 all: $(TARGET)
