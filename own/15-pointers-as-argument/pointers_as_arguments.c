@@ -1,7 +1,7 @@
 #include <stdio.h>
-void swap(int* a, int* b);
-void print_int(const int* a);
-void print_arr(const int* a[]);
+static void swap(int* a, int* b);
+static void print_int(const int* a);
+static void print_arr(const int* a, int size);
 
 int main(){
 	int x = 10, y = 20;
@@ -9,7 +9,7 @@ int main(){
 	printf("x: %d, y: %d \n", x, y);
 	print_int(&x);
 	int arr[3] = {1, 2, 3};
-	//print_arr(&arr);
+	print_arr(arr, 3);
 	return 0;
 }
 
@@ -20,16 +20,16 @@ void swap(int* a, int* b){
 	*b = tmp;
 }
 
-void print_arr(const int* arr[]){
-  const int arr_size = sizeof(*arr) / sizeof(*arr[0]);
-  for(int i=0; i<arr_size; i++){
-	printf("%d", *arr[i]);
-	if(i == arr_size-1){
+void print_arr(const int* arr, int size){
+  for(int i=0; i<size; i++){
+	printf("%d", *(arr+i));
+	if(i == size-1){
 		printf("");
 	}else{
 		printf(", ");
 	}
   }
+  printf("\n");
 }
 
 void print_int(const int* a){

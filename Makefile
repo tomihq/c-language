@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic
-TARGET = 10
+TARGET = pointers_as_arguments
 VPATH = $(shell find . -type d | tr '\n' ':')
 
 all: $(TARGET)
