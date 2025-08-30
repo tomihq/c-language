@@ -14,10 +14,10 @@ typedef struct {
 
 } monstruo_t;
 
-void fn1();
-void fn2();
-void print_msg(persona_t* p);
-void print_monstruo(monstruo_t* m);
+static void fn1();
+static void fn2();
+static void print_msg(persona_t* p);
+static void print_monstruo(monstruo_t* m);
 
 
 int main(){
@@ -68,7 +68,7 @@ void print_msg(persona_t* p){
 }
 
 void print_monstruo(monstruo_t* m){
-	printf("nombre: %s, vida: %d, ataque: %f, defensa: %f \n", m->nombre, m->vida, m->ataque, m-> defensa);
+	printf("nombre: %s, vida: %d, ataque: %f, defensa: %f \n", m->nombre, m->vida, m->ataque, m->defensa);
 	return;
 }
 
