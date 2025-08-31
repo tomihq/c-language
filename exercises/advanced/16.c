@@ -139,13 +139,13 @@ void* listRemove(list_t* l, uint8_t i){
         //vamos hasta el anterior al que queremos eliminar para jugar con los next.
         for(uint8_t j=0; j< i-1; j++){
             n = n -> next;
-            data = n -> next -> data;
-            tmp = n -> next;
-            n -> next = n -> next -> next; //nos "salteamos" el que eliminamos
-            if(tmp -> prev != NULL){
-                n -> prev = tmp -> prev; 
-                n -> next -> prev = n -> next; 
-            }
+        }
+        tmp = n->next;
+        data = tmp->data;
+
+        n->next = tmp->next;
+        if (tmp->next != NULL) {        
+            tmp->next->prev = n;     
         }
     }
     free(tmp);
