@@ -1,35 +1,4 @@
-/* 
-    Queremos crear una lista de nodos donde cada lista particular almacenará punteros a diferentes archivos en un file system.
-
-    La lista tendrá la siguiente información:
-        1. tipo de archivo que almacena (type_t).
-        2. tamaño de la lista.
-        3. puntero al primer nodo (archivo).
-
-    Cada nodo tendrá la siguiente información:
-        1. puntero a la información que se desconoce su tipo (apropósito para el ej)
-        2. puntero al siguiente nodo.
-
-    El tipo de los archivos que almacenará la lista puede ser alguno de los siguientes:
-    typedef enum e_type {
-        TypeFAT32 = 0,
-        TypeEXT4 = 1,
-        TypeNTFS = 2
-    } type_t;
-
-    Se pide: implementar las siguientes funciones
-    list_t* listNew(type_t t);
-    void listAddFirst(list_t* l, void* data);
-    void* listGet(list_t* l, uint8_t i); //se asume: i < l->size
-    void* listRemove(list_t* l, uint8_t i); //se asume: i < l->size
-    void listDelete(list_t* l);
-
-    listNew: Instancia una nueva lista en memoria y devuelve el puntero hacia la lista.
-    listAddFirst: Agrega un nuevo nodo a la lista y lo coloca en primer lugar adjuntando la información del archivo que está en void* data. 
-    listGet: Obtiene un puntero a los datos del nodo i en la lista.
-    listRemove: Elimina un nodo de la lista y devuelve el puntero a los datos del nodo eliminado. 
-    listDelete: Elimina la lista y libera la memoria reservada para los nodos y los datos.
-*/
+/* same 15 pero con lista doblemente enlazada */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -43,6 +12,7 @@ typedef enum e_type {
 typedef struct node {
     void* data;
     struct node* next; 
+    struct node* prev; 
 } node_t; 
 
 typedef struct list {
@@ -137,8 +107,11 @@ void listAddFirst(list_t* l, void* data){
             n->data = (void*) copy_ntfs((ntfs_t*) data);
             break;
     }
-    
     n -> next = l -> first;
+    n->prev = NULL;         
+    if (l->first != NULL) {  
+        l->first->prev = n; 
+    }
     l -> size += 1;
     l -> first = n; 
 }
@@ -158,14 +131,21 @@ void* listRemove(list_t* l, uint8_t i){
         data = l -> first -> data;
         tmp = l -> first;
         l -> first = l -> first -> next;
+        if(tmp -> prev != NULL){
+            l -> first -> prev = NULL;
+        }
     }else{
         node_t* n = l -> first;
         //vamos hasta el anterior al que queremos eliminar para jugar con los next.
-        for(uint8_t j=0; j<i-1; j++){
+        for(uint8_t j=0; j< i-1; j++){
             n = n -> next;
             data = n -> next -> data;
             tmp = n -> next;
             n -> next = n -> next -> next; //nos "salteamos" el que eliminamos
+            if(tmp -> prev != NULL){
+                n -> prev = tmp -> prev; 
+                n -> next -> prev = n -> next; 
+            }
         }
     }
     free(tmp);
