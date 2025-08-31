@@ -172,6 +172,8 @@ void* listRemove(list_t* l, uint8_t i){
     Puede aparecer n primero o m primero. 
 
 */
+
+//refactorizar a DLL
 void listSwapNodes(list_t* list, node_t* n, node_t* m) {
     if (!list || !n || !m || n == m)
         return;
@@ -221,7 +223,8 @@ void listSwapNodes(list_t* list, node_t* n, node_t* m) {
 void listDelete(list_t* l){
     node_t* n = l->first;
     while(n){
-    node_t* tmp = n;n = n->next;
+    node_t* tmp = n;
+    n = n->next;
     switch(l->type) {
         case TypeFAT32:
             rm_fat32((fat32_t*) tmp->data);
