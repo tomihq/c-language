@@ -79,6 +79,7 @@ list_t* listNew(type_t t){
     list -> type = t; 
     list -> size = 0; 
     list -> first = NULL;
+    list -> last = NULL;
     return list; 
 }
 
@@ -249,21 +250,22 @@ void listSwapNodes(list_t* list, node_t* n, node_t* m) {
 /* listDelete: Elimina todos los datos de la lista y su información. La idea es primero liberar la memoria de cada uno de los nodos, y por último, la de la lista. No se puede hacer en el orden inverso porque si borramos la lista perdemos el puntero hacia el primer nodo, y por ende, hasta los otros */
 
 void listDelete(list_t* l){
+    if(l->size == 0) return; 
     node_t* n = l->first;
-    while(n){
-    node_t* tmp = n;
-    n = n->next;
-    switch(l->type) {
-        case TypeFAT32:
-            rm_fat32((fat32_t*) tmp->data);
-            break;
-        case TypeEXT4:
-            rm_ext4((ext4_t*) tmp->data);
-            break;
-        case TypeNTFS:
-            rm_ntfs((ntfs_t*) tmp->data);
-            break;
-    }
+    while(n != NULL){
+        node_t* tmp = n;
+        n = n->next;
+        switch(l->type) {
+            case TypeFAT32:
+                rm_fat32((fat32_t*) tmp->data);
+                break;
+            case TypeEXT4:
+                rm_ext4((ext4_t*) tmp->data);
+                break;
+            case TypeNTFS:
+                rm_ntfs((ntfs_t*) tmp->data);
+                break;
+        }
         free(tmp);
     }
     free(l);
