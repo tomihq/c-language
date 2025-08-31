@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic
-TARGET = primitives-pointers-fn
+TARGET = 11e
 VPATH = $(shell find . -type d | tr '\n' ':')
 
 all: $(TARGET)
