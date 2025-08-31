@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -g
-TARGET = 17
+TARGET = 18-fixed
 VPATH = $(shell find . -type d | tr '\n' ':')
 
 all: $(TARGET)
