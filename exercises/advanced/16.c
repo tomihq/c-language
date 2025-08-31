@@ -19,10 +19,12 @@ typedef struct list {
     type_t type;
     uint8_t size;
     node_t* first;
+    node_t* last; 
 } list_t;
 
 
 list_t* listNew(type_t t);
+void listAddLast(list_t* l, void* data);
 void listAddFirst(list_t* l, void* data);
 void* listGet(list_t* l, uint8_t i); //se asume: i < l->size
 void* listRemove(list_t* l, uint8_t i); //se asume: i < l->size
@@ -114,6 +116,42 @@ void listAddFirst(list_t* l, void* data){
     }
     l -> size += 1;
     l -> first = n; 
+}
+
+void listAddLast(list_t* l, void* data){
+    node_t* new_last_node = malloc(sizeof(node_t));
+    if(new_last_node == NULL){
+        printf("ERR assigning dynamic memory to node_t"); 
+    }
+    switch(l->type) {
+        case TypeFAT32:
+            new_last_node->data = (void*) copy_fat32((fat32_t*) data);
+            break;
+        case TypeEXT4:
+            new_last_node->data = (void*) copy_ext4((ext4_t*) data);
+            break;
+        case TypeNTFS:
+            new_last_node->data = (void*) copy_ntfs((ntfs_t*) data);
+            break;
+    }
+
+    if(l -> size == 0){
+        l -> first = new_last_node; 
+        new_last_node -> prev = NULL; 
+        new_last_node -> next = NULL;
+    }else {
+        node_t* old_last_node = l -> first; 
+        //si llegamos al ultimo nodo no tiene siguiente.
+        while(old_last_node -> next != NULL){
+            old_last_node = old_last_node -> next;  
+        }
+        new_last_node -> prev = old_last_node;
+        old_last_node -> next = new_last_node; 
+    }
+
+    l -> last = new_last_node; 
+    l -> size += 1; 
+
 }
 
 void* listGet(list_t* l, uint8_t i){
