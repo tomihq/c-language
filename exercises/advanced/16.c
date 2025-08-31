@@ -58,25 +58,15 @@ int main(){
     printf("Type: %d | Size: %d | First: %p \n", l->type, l->size, (void*) l->first);
     fat32_t* f1 = new_fat32();
     fat32_t* f2 = new_fat32();
-    fat32_t* f3 = new_fat32();
-    fat32_t* f4 = new_fat32();
     listAddFirst(l, f1);
     printf("Type: %d | Size: %d | First: %p \n", l->type, l->size, (void*) l->first);
-    listAddFirst(l, f2);
+    listAddLast(l, f2);
     printf("Type: %d | Size: %d | First: %p \n", l->type, l->size, (void*) l->first);
-    listAddFirst(l, f3);
-    listAddFirst(l, f4);
-    printf("Node: %p \n", (void*) l->first->next);
-    printf("Node: %p \n", (void*) l->first->next->next);
-    listSwapNodes(l, l->first->next,  l->first->next->next);
-    printf("¡Swapped nodes! \n");
-    printf("Node: %p \n", (void*) l->first->next);
-    printf("Node: %p \n", (void*) l->first->next->next);
+    printf("Type: %d | Size: %d | Last: %p \n", l->type, l->size, (void*) l->last);
     listDelete(l);
     rm_fat32(f1);
     rm_fat32(f2);
-    rm_fat32(f3);
-    rm_fat32(f4);
+
     return 0; 
 }
 
