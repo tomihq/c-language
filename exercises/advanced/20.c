@@ -30,6 +30,10 @@ void screen_draw_layout(void) {
     ¿Qué pasaría si en vez de ca(*p)[VIDEO COLS] hubiéramos declarado ca** p?
     Explotaría el cast.
     ca **p es un puntero puntero a ca. En este caso, estaría apuntando a una dirección de memoria, que a su vez si se desreferencia nos traería un único valor.
+    p   → dirección que contiene otro puntero
+    *p  → dirección de un struct ca
+    **p → struct ca
+
     Para que p[i][j] funcione correctamente:
         1. p tiene que apuntar a un arreglo de punteros, uno por fila.
         2. Cada p[i] tiene que apuntar a un bloque contiguo de VIDEO_COLS structs.
