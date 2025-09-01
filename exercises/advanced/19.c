@@ -52,7 +52,7 @@ int main() {
 
 /* 
     *1: Almacena la dirección de memoria de la fila 1 columna 1. Es decir estamos apuntando a específicamente ese lugar. Si nos movemos, estamos moviendonos en la memoria. ¡Podemos recorrer la matriz entera de un solo saque! Lo recomendable es que sepas cuantas posiciones podés moverte porque sino caerías en info basura. En este caso te moverías máximo hasta 11 (12 elems)
-    *2: Castea el puntero p a querer tratar p como un puntero a array de enteros de longitud 2.
+    *2: Castea el puntero p a querer tratar p como un puntero a array de enteros de longitud 2 (6 filas de 2 elementos).
     El reshape es una técnica de bajo nivel para obtener flexibilidad y control total sobre cómo se manipula la memoria. En este caso particular le estamos diciendo que trate a matrix como una matriz de 2 filas.
     Entonces, si queremos recorrer la matriz podemos jugar con la idea de que "cada fila tiene longitud 2"
         1: {1, 2}
