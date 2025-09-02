@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -pedantic -g
-TARGET = 19
+TARGET = 21-callbacks
 VPATH = $(shell find . -type d | tr '\n' ':')
 
 all: $(TARGET)
